@@ -4,8 +4,8 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class CurrencyModel (
+data class RatesModel (
     val base: String,
     val date: String,
-    val rates: Map<String, Double>
+    val rates: Map<String, Float>
 ) : Parcelable

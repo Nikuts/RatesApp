@@ -3,8 +3,7 @@ ext {
 
     kotlin_version = '1.3.50'
 
-    kotlinx_serialization_version = '0.13.0'
-    lifecycle_extensions_version = '2.1.0'
+    lifecycle_version = '2.2.0-rc02'
 
     recyclerview_version = '1.0.0'
 
@@ -15,7 +14,7 @@ ext {
 
     retrofit_version = '2.6.2'
 
-    kotlinx_coroutines_version = "1.3.2"
+    coroutines_version = "1.3.2"
 
     converter_moshi_version = "2.6.2"
 
