@@ -26,7 +26,12 @@ open class CurrencyItem(
 
     fun onTextChanged(text: CharSequence) {
         val newAmount = text.toString().toFloatOrNull()
-        if (newAmount != amount.get()) events?.onValueChanged(this, newAmount)
+        newAmount?.let {
+            if (it != amount.get()) {
+                amount.set(it)
+                events?.onValueChanged(this, it)
+            }
+        }
     }
 
     fun updateRate(rate: Float) {
