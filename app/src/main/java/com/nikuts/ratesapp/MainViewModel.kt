@@ -1,6 +1,5 @@
 package com.nikuts.ratesapp
 
-import android.os.Handler
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

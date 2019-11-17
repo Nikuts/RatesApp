@@ -6,7 +6,6 @@ import android.view.inputmethod.InputMethod
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
-import androidx.databinding.ObservableBoolean
 
 @BindingAdapter("requestFocus")
 fun requestFocus(view: EditText, requestFocus: Boolean) {
