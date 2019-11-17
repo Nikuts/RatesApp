@@ -8,4 +8,26 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="RatesTitle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="CurrencyText" >
+    <item name="android:textColor">@color/colorCurrencyText</item>
+    </style>
+
+    <style name="CurrencyText.Title">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="CurrencyText.Amount">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="CurrencyText.Subtitle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorCurrencySubtitle</item>
+    </style>
+
 </resources>

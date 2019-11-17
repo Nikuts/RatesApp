@@ -17,16 +17,16 @@ class RatesRepositoryImpl: RatesRepository {
         return if (response.isSuccessful) {
             ApiToBusinessMapper.mapRates(response.body())?.let {
                 Result.Success(it)
-            } ?: Result.Failure("No data")
+            } ?: Result.Failure(ResponseError.PARSING)
         } else {
-            Result.Failure(response.message())
+            Result.Failure(ResponseError.PARSING)
         }
     }
 
     private suspend fun <T> safeApiCall(call: suspend () -> Result<T>): Result<T> = try {
         call.invoke()
     } catch (e: Exception) {
-        Result.Failure(e.localizedMessage)
+        Result.Failure(ResponseError.GENERIC)
     }
 
 }

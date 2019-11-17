@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">RatesApp</string>
+    <string name="general_ok">OK</string>
+    <string name="general_error">Something went wrong. Please, try again later.</string>
+    <string name="parsing_error">Error while parsing data from server. Please, try again later.</string>
+    <string name="rates_title">Rates</string>
 </resources>

@@ -1,14 +1,14 @@
 package com.nikuts.ratesapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nikuts.ratesapp.databinding.ActivityMainBinding
-import kotlinx.android.synthetic.main.activity_main.*
+import com.nikuts.ratesapp.network.ResponseError
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,7 +29,30 @@ class MainActivity : AppCompatActivity() {
             recyclerView.adapter = adapter
         }
 
-        viewModel.items.observe(this, Observer { adapter.update(it) })
-        viewModel.scrollEvent.observe(this, Observer { binding.recyclerView.layoutManager?.scrollToPosition(0) })
+        viewModel.items.observe(this, itemsObserver())
+        viewModel.error.observe(this, errorObserver())
+        viewModel.scrollEvent.observe(this, scrollEventObserver())
+    }
+
+    private fun itemsObserver() = Observer<ArrayList<CurrencyItem>> {
+        adapter.update(it)
+    }
+
+    private fun errorObserver() = Observer<ResponseError> {
+
+        val message = when (it) {
+            ResponseError.PARSING -> getString(R.string.parsing_error)
+            else -> getString(R.string.general_error)
+        }
+
+        AlertDialog.Builder(this)
+            .setMessage(message)
+            .setPositiveButton(R.string.general_ok) { _, _ ->  }
+            .create()
+            .show()
+    }
+
+    private fun scrollEventObserver() = Observer<Unit> {
+        binding.recyclerView.layoutManager?.scrollToPosition(0)
     }
 }

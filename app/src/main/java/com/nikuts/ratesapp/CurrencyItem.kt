@@ -1,20 +1,20 @@
 package com.nikuts.ratesapp
 
 import androidx.databinding.ObservableBoolean
-import androidx.databinding.ObservableField
 import androidx.databinding.ObservableFloat
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
 open class CurrencyItem(
-    title: String,
+    val title: String,
+    val subtitle: String?,
+    val imageUrl: String?,
     rate: Float,
     amount: Float,
     editable: Boolean = false,
     private val events: CurrencyItemEvents? = null
 ) {
 
-    val title = ObservableField<String>(title)
     val rate = ObservableFloat(rate)
     val amount = ObservableFloat(amount)
     val editable = ObservableBoolean(editable)
@@ -27,10 +27,6 @@ open class CurrencyItem(
     fun onTextChanged(text: CharSequence) {
         val newAmount = text.toString().toFloatOrNull()
         if (newAmount != amount.get()) events?.onValueChanged(this, newAmount)
-    }
-
-    fun updateTitle(title: String) {
-        this.title.set(title)
     }
 
     fun updateRate(rate: Float) {

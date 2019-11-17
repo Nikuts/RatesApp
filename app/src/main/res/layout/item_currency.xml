@@ -11,7 +11,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_default"
+        android:layout_marginBottom="@dimen/margin_default"
         android:onClick="@{() -> item.onItemClicked()}">
+
+        <ImageView
+            android:id="@+id/currency_image"
+            android:layout_width="@dimen/currency_image_size"
+            android:layout_height="@dimen/currency_image_size"
+            android:layout_marginStart="@dimen/margin_large"
+            app:imageUrl="@{item.imageUrl}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/subtitle"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
             android:id="@+id/title"
@@ -19,20 +31,37 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_default"
             android:text="@{item.title}"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="@style/CurrencyText.Title"
+            app:layout_constraintStart_toEndOf="@id/currency_image"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="EUR"/>
+
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:textAppearance="@style/CurrencyText.Subtitle"
+            android:text="@{item.subtitle}"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintStart_toStartOf="@id/title"
+            tools:text="Subtitle"/>
 
         <EditText
             android:id="@+id/rate"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="@dimen/margin_default"
-            android:enabled="@{item.editable}"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:inputType="number"
+            android:textAppearance="@style/CurrencyText.Amount"
             android:onTextChanged="@{(text, start, before, count) -> item.onTextChanged(text)}"
             android:text="@{item.round2(item.amount)}"
-            app:layout_constraintTop_toTopOf="parent"
+            android:focusable="@{item.editable}"
+            android:onClick="@{() -> item.onItemClicked()}"
+            android:focusableInTouchMode="@{item.editable}"
+            app:requestFocus="@{safeUnbox(item.editable)}"
+            app:layout_constraintTop_toTopOf="@id/title"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
