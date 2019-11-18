@@ -67,7 +67,7 @@ class MainViewModel: ViewModel(), CurrencyItem.CurrencyItemEvents {
             base = rates.base
             topItem = CurrencyItem(
                 rates.base,
-                MOCKED_SUBTITLE,
+                rates.base,
                 null,
                 1f,
                 DEFAULT_AMOUNT,
@@ -97,14 +97,14 @@ class MainViewModel: ViewModel(), CurrencyItem.CurrencyItemEvents {
             val updateItem = itemsList.find { it.title == rate.key }
             if ( updateItem != null) {
                 updateItem.updateRate(rate.value)
-                updateItem.updateAmount(topItem.amount.get())
+                updateItem.updateAmount(topItem.amount)
             } else {
                 itemsList.add(CurrencyItem(
                     rate.key,
-                    MOCKED_SUBTITLE,
+                    rate.key,
                     null,
                     rate.value,
-                    rate.value * topItem.amount.get(),
+                    rate.value * topItem.amount,
                     false,
                     this
                 ))
@@ -143,7 +143,5 @@ class MainViewModel: ViewModel(), CurrencyItem.CurrencyItemEvents {
     companion object {
         const val DEFAULT_AMOUNT = 100f
         const val DEFAULT_DELAY = 1000L
-
-        const val MOCKED_SUBTITLE = "Subtitle"
     }
 }

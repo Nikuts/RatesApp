@@ -1,5 +1,7 @@
 package com.nikuts.ratesapp
 
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableFloat
 import java.math.RoundingMode
@@ -13,11 +15,19 @@ open class CurrencyItem(
     amount: Float,
     editable: Boolean = false,
     private val events: CurrencyItemEvents? = null
-) {
+): BaseObservable() {
 
-    val rate = ObservableFloat(rate)
-    val amount = ObservableFloat(amount)
-    val editable = ObservableBoolean(editable)
+    @Bindable
+    var rate: Float = rate
+        private set
+
+    @Bindable
+    var amount: Float = amount
+        private set
+
+    @Bindable
+    var editable: Boolean = editable
+        private set
 
     fun onItemClicked() {
         events?.onSelected(this)
@@ -27,23 +37,26 @@ open class CurrencyItem(
     fun onTextChanged(text: CharSequence) {
         val newAmount = text.toString().toFloatOrNull()
         newAmount?.let {
-            if (it != amount.get()) {
-                amount.set(it)
+            if (it != amount) {
+                amount = it
                 events?.onValueChanged(this, it)
             }
         }
     }
 
     fun updateRate(rate: Float) {
-        this.rate.set(rate)
+        this.rate = rate
+        notifyPropertyChanged(BR.rate)
     }
 
     fun updateAmount(amount: Float) {
-        this.amount.set(amount * rate.get())
+        this.amount = amount * rate
+        notifyPropertyChanged(BR.amount)
     }
 
     fun updateEditable(editable: Boolean) {
-        this.editable.set(editable)
+        this.editable = editable
+        notifyPropertyChanged(BR.editable)
     }
 
     fun select() {
