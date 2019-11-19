@@ -2,8 +2,6 @@ package com.nikuts.ratesapp
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import androidx.databinding.ObservableBoolean
-import androidx.databinding.ObservableFloat
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -11,15 +9,11 @@ open class CurrencyItem(
     val title: String,
     val subtitle: String?,
     val imageUrl: String?,
-    rate: Float,
+    var rate: Float,
     amount: Float,
     editable: Boolean = false,
     private val events: CurrencyItemEvents? = null
 ): BaseObservable() {
-
-    @Bindable
-    var rate: Float = rate
-        private set
 
     @Bindable
     var amount: Float = amount
@@ -42,11 +36,6 @@ open class CurrencyItem(
                 events?.onValueChanged(this, it)
             }
         }
-    }
-
-    fun updateRate(rate: Float) {
-        this.rate = rate
-        notifyPropertyChanged(BR.rate)
     }
 
     fun updateAmount(amount: Float) {

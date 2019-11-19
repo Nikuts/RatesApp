@@ -96,7 +96,7 @@ class MainViewModel: ViewModel(), CurrencyItem.CurrencyItemEvents {
         rates.forEach { rate ->
             val updateItem = itemsList.find { it.title == rate.key }
             if ( updateItem != null) {
-                updateItem.updateRate(rate.value)
+                updateItem.rate = rate.value
                 updateItem.updateAmount(topItem.amount)
             } else {
                 itemsList.add(CurrencyItem(
